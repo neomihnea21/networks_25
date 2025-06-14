@@ -1,0 +1,12 @@
+services:
+   dns:
+     image: python:3.13-slim
+     container_name: dns-server
+     ports:
+       - "9320:53/udp"
+     volumes:
+      - ./dns_server.py:/app/dns_server.py
+     working_dir: /app
+     command: ["sh", "pip install scapy && python3 dns_server.py"]
+     cap_add:
+       - NET_ADMIN
